@@ -10,6 +10,14 @@ cube(`AssetsCrate`, {
     AssettypesCrate: {
       relationship: `hasOne`,
       sql: `${CUBE}.type_id = ${AssettypesCrate}.id`,
+    },
+    AssetsdevicesCrate: {
+      relationship: `hasMany`,
+      sql: `${CUBE}.id = ${AssetsdevicesCrate}.asset_id`,
+    },
+    AssetssmartdevicesCrate: {
+      relationship: `hasMany`,
+      sql: `${CUBE}.id = ${AssetssmartdevicesCrate}.asset_id`,
     }
   },
   

@@ -10,6 +10,10 @@ cube(`MeasurementsCrate`, {
     DevicesCrate: {
       relationship: `hasOne`,
       sql: `${CUBE}.device_id = ${DevicesCrate}.id`,
+    },
+    MeasurementsDataCrate: {
+      relationship: `hasMany`,
+      sql: `${CUBE.id} = ${MeasurementsDataCrate.measurementId}`,
     }
   },
   

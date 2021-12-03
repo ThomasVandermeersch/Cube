@@ -13,7 +13,7 @@ cube(`AssetssmartdevicesCrate`, {
     },
     SmartdevicesCrate: {
       relationship: `hasOne`,
-      sql: `${CUBE}.device_id = ${SmartdevicessCrate}.id`,
+      sql: `${CUBE}.smartdevice_id = ${SmartdevicesCrate}.id`,
     }
   },
   

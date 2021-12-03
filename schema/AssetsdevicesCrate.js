@@ -9,11 +9,11 @@ cube(`AssetsdevicesCrate`, {
   joins: {
     AssetsCrate: {
       relationship: `hasOne`,
-      sql: `${CUBE}.asset_id = ${AssetsCrate}.id`,
+      sql: `${CUBE.assetId} = ${AssetsCrate.id}`,
     },
     DevicesCrate: {
       relationship: `hasOne`,
-      sql: `${CUBE}.device_id = ${DevicessCrate}.id`,
+      sql: `${CUBE.deviceId} = ${DevicesCrate.id}`,
     }
   },
   

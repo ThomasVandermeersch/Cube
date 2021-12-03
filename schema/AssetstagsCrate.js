@@ -1,5 +1,5 @@
-cube(`SmartdevicesCrate`, {
-  sql: `SELECT * FROM doc.smartdevices_crate`,
+cube(`AssetstagsCrate`, {
+  sql: `SELECT * FROM doc.assetstags_crate`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
@@ -7,20 +7,16 @@ cube(`SmartdevicesCrate`, {
   },
   
   joins: {
-    TeamsCrate: {
+    AssetsCrate: {
       relationship: `hasOne`,
-      sql: `${CUBE}.device_id = ${TeamsCrate}.id`,
-    },
-    SmartmeasurementsCrate: {
-      relationship: `hasOne`,
-      sql: `${CUBE.id} = ${SmartmeasurementsCrate.smartdeviceId}`,
+      sql: `${CUBE}.asset_id = ${AssetsCrate}.id`,
     }
   },
   
   measures: {
     count: {
       type: `count`,
-      drillMembers: [id, teamId, name]
+      drillMembers: [id, assetId, linkedassetId, assetName]
     }
   },
   
@@ -29,16 +25,22 @@ cube(`SmartdevicesCrate`, {
       sql: `id`,
       type: `string`,
       primaryKey: true,
-      shown : true
+      title: `L`
     },
     
-    teamId: {
-      sql: `team_id`,
+    assetId: {
+      sql: `asset_id`,
       type: `string`
     },
     
-    name: {
-      sql: `name`,
+    linkedassetId: {
+      sql: `linkedasset_id`,
+      type: `string`,
+      title : "Linked"
+    },
+    
+    assetName: {
+      sql: `asset_name`,
       type: `string`
     }
   },
