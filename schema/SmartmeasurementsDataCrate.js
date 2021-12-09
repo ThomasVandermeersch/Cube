@@ -1,14 +1,23 @@
 cube(`SmartmeasurementsDataCrate`, {
   sql: `SELECT * FROM doc.smartmeasurements_data_crate`,
-  preAggregations: {// Pre-Aggregations definitions go here
+  preAggregations: {
+    // Pre-Aggregations definitions go here
     // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
-
     main: {
-      measures: [SmartmeasurementsDataCrate.total],
-      dimensions: [AssetstagsCrate.linkedassetId, SmartmeasurementsDataCrate.type],
+      measures: [SmartmeasurementsDataCrate.count, SmartmeasurementsDataCrate.total],
+      dimensions: [AssetstagsCrate.linkedassetId],
       refreshKey: {
         every: `12 hour`
       }
+    },
+    second: {
+      measures: [SmartmeasurementsDataCrate.total, SmartmeasurementsDataCrate.count],
+      dimensions: [SmartmeasurementsCrate.smartdeviceId],
+      refreshKey: {
+        every: `12 hour`
+      },
+      timeDimension: SmartmeasurementsCrate.timestamp,
+      granularity: `day`
     }
   },
   joins: {
@@ -25,13 +34,18 @@ cube(`SmartmeasurementsDataCrate`, {
     total: {
       sql: `value`,
       type: `sum`
+    },
+    data: {
+      sql: `value`,
+      type: `number`
     }
   },
   dimensions: {
     id: {
       sql: `id`,
       type: `string`,
-      primaryKey: true
+      primaryKey: true,
+      shown: true
     },
     smartmeasurementId: {
       sql: `smartmeasurement_id`,
