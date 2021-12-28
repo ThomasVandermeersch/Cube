@@ -4,7 +4,7 @@
 ### Modify the node_modules
 
 You have to temporary delete the processing of set time zone
-Go to : ./node_modules/.bin/@cubejs-backend/postgres-drive/dist/PostgresDriver.js
+Go to : ./node_modules/@cubejs-backend/postgres-drive/dist/PostgresDriver.js
 Comment line containing "await conn.query(`SET TIME ZONE '${this.config.storeTimezone || 'UTC'}'`);"
 
 ## Step 2
